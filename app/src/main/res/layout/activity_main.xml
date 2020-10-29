@@ -5,11 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/bottom_navigation"/>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -17,4 +13,87 @@
         android:layout_alignParentBottom="true"
         app:menu="@menu/bottom_navigation"
         android:background="#E8ECEA" />
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:layout_above="@id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:id="@+id/motionLayout"
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/activity_main_scene" >
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:id="@+id/ivDetail"
+            android:background="@color/colorAccent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <RelativeLayout
+            android:id="@+id/rlSeekBar"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content">
+            <SeekBar
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentTop="true"
+                android:id="@+id/positionBar"
+                android:layout_width="300dp"
+                android:layout_marginTop="30dp"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:id="@+id/llInsideRl"
+                android:orientation="horizontal"
+                android:layout_below="@id/positionBar"
+                android:layout_width="match_parent"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/timeStart"
+                    android:text="01:30"
+                    android:layout_marginStart="40dp"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp" />
+                <View
+                    android:layout_weight="4"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"/>
+                <TextView
+                    android:layout_weight="2"
+                    android:layout_below="@id/positionBar"
+                    android:id="@+id/timeStop"
+                    android:text="01:30"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/llController"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:id="@+id/btPrevious"
+                android:background="@null"
+                android:src="@drawable/ic_baseline_skip_previous_24"
+                android:layout_width="60dp"
+                android:layout_height="60dp"/>
+            <ImageButton
+                android:id="@+id/btPlay"
+                android:background="@null"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_baseline_pause_24"/>
+            <ImageButton
+                android:id="@+id/btSkip"
+                android:background="@null"
+                android:src="@drawable/ic_baseline_skip_next_24"
+                android:layout_width="60dp"
+                android:layout_height="60dp"/>
+        </LinearLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+
 </RelativeLayout>

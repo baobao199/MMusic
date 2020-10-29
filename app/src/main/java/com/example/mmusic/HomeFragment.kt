@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.io.File
@@ -35,9 +37,17 @@ class HomeFragment : Fragment(){
         recyclerViewListMusic.apply {
             val listMusic = ListMusicAdapter(arrList)
             adapter = listMusic
+            listMusic.onClick = {music->
+                activity?.let {
+                    val viewmodel = ViewModelProviders.of(it).get(ActivityViewModel::class.java)
+                    viewmodel.dataMusic.postValue(music)
+
+                }
+            }
             layoutManager = LinearLayoutManager(activity)
             listMusic.notifyDataSetChanged()
         }
+
     }
 
     fun ReadSongs(root: File,arrList:MutableList<Music>) {
