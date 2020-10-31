@@ -41,7 +41,6 @@ class HomeFragment : Fragment(){
                 activity?.let {
                     val viewmodel = ViewModelProviders.of(it).get(ActivityViewModel::class.java)
                     viewmodel.dataMusic.postValue(music)
-                    viewmodel.isClicked.postValue(true)
                 }
             }
             layoutManager = LinearLayoutManager(activity)
