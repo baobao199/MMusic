@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         currentPlayer = MediaPlayer()
         initView()
         handleOnClick()
-
+        getDataFromViewModel()
         positionBar.setOnSeekBarChangeListener(
             object : SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(
@@ -71,6 +71,15 @@ class MainActivity : AppCompatActivity() {
                 }
 
             })
+    }
+
+    private fun getDataFromViewModel() {
+        sharedViewmodel = ViewModelProviders.of(this).get(ActivityViewModel::class.java)
+
+        sharedViewmodel?.dataListMusic?.observe(this, Observer {
+            Log.d("DUYY", it[1].position.toString())
+        }
+        )
     }
 
     @SuppressLint("ClickableViewAccessibility")

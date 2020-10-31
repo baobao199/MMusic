@@ -32,7 +32,10 @@ class HomeFragment : Fragment(){
 
         val arrList = mutableListOf<Music>()
         ReadSongs(fullpath,arrList)
-
+        activity?.let {
+            val viewmodel = ViewModelProviders.of(it).get(ActivityViewModel::class.java)
+            viewmodel.dataListMusic.postValue(arrList)
+        }
         // RecyclerView node initialized here
         recyclerViewListMusic.apply {
             val listMusic = ListMusicAdapter(arrList)
@@ -53,13 +56,15 @@ class HomeFragment : Fragment(){
         val fileList: ArrayList<File> = ArrayList()
         val listAllFiles = root.listFiles()
         val listMusic = mutableListOf<String>()
+        var i =0
         if (listAllFiles != null && listAllFiles.size > 0) {
             for (currentFile in listAllFiles) {
                 if (currentFile.name.endsWith(".mp3")) {
                     fileList.add(currentFile.absoluteFile)
                     listMusic.add(currentFile.getName())
 
-                    val music = Music(currentFile.absolutePath,currentFile.name)
+                    val music = Music(currentFile.absolutePath,currentFile.name,i)
+                    i +=1
                     arrList.add(music)
                 }
             }
