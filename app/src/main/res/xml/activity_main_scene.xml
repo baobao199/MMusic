@@ -2,6 +2,51 @@
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+    <ConstraintSet android:id="@+id/baseState">
+        <Constraint
+            android:id="@+id/ivDetail"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="20dp">
+            <PropertySet android:visibility="invisible"/>
+        </Constraint>
+        <Constraint
+            android:id="@+id/llController"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/rlSeekBar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp">
+            <PropertySet android:visibility="invisible"/>
+        </Constraint>
+        <Constraint
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+            <PropertySet
+                android:visibility="visible"/>
+        </Constraint>
+        <Constraint
+            android:id="@+id/rlSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/ivDetail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp">
+            <PropertySet android:visibility="invisible"/>
+        </Constraint>
+    </ConstraintSet>
+
     <ConstraintSet android:id="@+id/start">
         <Constraint
             android:id="@+id/ivDetail"
@@ -10,8 +55,11 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="20dp"
-            />
+            android:layout_marginTop="20dp">
+            <PropertySet android:visibility="visible"/>
+        </Constraint>
+
+
         <Constraint
             android:id="@+id/llController"
             android:layout_width="wrap_content"
@@ -19,7 +67,11 @@
             app:layout_constraintTop_toBottomOf="@id/rlSeekBar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp">
+            <PropertySet android:visibility="visible"/>
+        </Constraint>
+
+
         <Constraint
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
@@ -50,7 +102,11 @@
             android:layout_height="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="10dp"/>
+            android:layout_marginStart="10dp">
+            <PropertySet android:visibility="visible"/>
+        </Constraint>
+
+
         <Constraint
             android:id="@+id/llController"
             android:layout_width="0dp"
@@ -59,7 +115,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/ivDetail"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp">
+            <PropertySet android:visibility="visible"/>
+        </Constraint>
+
+
         <Constraint
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
@@ -82,7 +142,13 @@
             <PropertySet android:visibility="gone"/>
         </Constraint>
     </ConstraintSet>
-
+    <Transition
+        android:id="@+id/baseStateToStart"
+        app:constraintSetEnd="@id/start"
+        app:constraintSetStart="@+id/baseState"
+        app:duration="300"
+        >
+    </Transition>
     <Transition
         android:id="@id/jumpToEnd"
         app:constraintSetEnd="@id/end"
@@ -97,4 +163,5 @@
         app:duration="300"
         >
     </Transition>
+
 </MotionScene>
