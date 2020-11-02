@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.common.primitives.UnsignedBytes.toInt
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
 
@@ -149,6 +150,32 @@ class MainActivity : AppCompatActivity() {
                 currentPlayer.start()
                 btPlay.setImageResource(R.drawable.ic_baseline_pause_24)
             }
+        }
+        btSkip.setOnClickListener {
+            sharedViewmodel?.dataMusic?.observe(this,{
+                var positionCurrent = it.position
+                Log.e("bao", ""+positionCurrent)
+                if(currentPlayer.isPlaying){
+                    currentPlayer.stop();
+                    var positionNext = positionCurrent + 1
+                    sharedViewmodel?.dataListMusic?.observe(this,{
+                        if(positionNext > it.size){
+                            positionNext = 0
+                            var path = it[positionNext].mPath
+                            mediaPlayer = MediaPlayer.create(this, Uri.parse(path))
+                            initialiseSeekBar()
+                            mediaPlayer.start()
+                        }
+                        else{
+                            var path = it[positionNext].mPath
+                            mediaPlayer = MediaPlayer.create(this, Uri.parse(path))
+                            initialiseSeekBar()
+                            mediaPlayer.start()
+                        }
+
+                    })
+                }
+            })
         }
     }
 
